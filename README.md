@@ -30,6 +30,19 @@
         Log.d(TAG, "msg:" + msg);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    //普通事件，并且设定该方法运行的线程和设定只接收指定code的事件
+    @Subscribe(threadMode = ThreadMode.IO, code = 2)
+    public void onRxBusEvent2(String msg) {
+        Log.d(TAG, "msg:" + msg + "\ncode 2\n" + Thread.currentThread().getName());
+    }
+
+    //只接收粘性事件
+    @Subscribe(receiveStickyEvent = true)
+    public void onRxBusEvent3(String msg) {
+        Log.d(TAG, "msg:" + msg);
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 ```
 
  * 4.使用post(Object)或者使用post(int, Object)来发送一个事件
