@@ -32,3 +32,6 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
 }
+
+//gradle-jcenter-push.gradle文件是用于发布到jcenter上的，若是找不到可以屏蔽这句话
+apply from: 'gradle-jcenter-push.gradle'
