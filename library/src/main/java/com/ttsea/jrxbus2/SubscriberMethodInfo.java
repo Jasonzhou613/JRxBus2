@@ -3,12 +3,12 @@ package com.ttsea.jrxbus2;
 import java.lang.reflect.Method;
 
 /**
- * 订阅者中订阅方法的一些信息 <br/>
+ * 订阅者中订阅方法的一些信息 <br>
  * <p>
- * <b>more:</b> 更多请参考<a href="http://www.ttsea.com" title="小周博客">www.ttsea.com</a> <br/>
- * <b>date:</b> 2017/1/11 15:19 <br/>
- * <b>author:</b> Jason <br/>
- * <b>version:</b> 1.0 <br/>
+ * <b>more:</b> 更多请参考<a href="http://www.ttsea.com" title="小周博客">www.ttsea.com</a> <br>
+ * <b>date:</b> 2017/1/11 15:19 <br>
+ * <b>author:</b> Jason <br>
+ * <b>version:</b> 1.0 <br>
  * <b>last modified date:</b> 2017/1/11 15:19.
  */
 class SubscriberMethodInfo {

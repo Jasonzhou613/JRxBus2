@@ -3,12 +3,12 @@ package com.ttsea.jrxbus2;
 import android.util.Log;
 
 /**
- * log <br/>
+ * log <br>
  * <p>
- * <b>more:</b> 更多请参考<a href="http://www.ttsea.com" title="小周博客">www.ttsea.com</a> <br/>
- * <b>date:</b> 2017/1/17 10:26 <br/>
- * <b>author:</b> Jason <br/>
- * <b>version:</b> 1.0 <br/>
+ * <b>more:</b> 更多请参考<a href="http://www.ttsea.com" title="小周博客">www.ttsea.com</a> <br>
+ * <b>date:</b> 2017/1/17 10:26 <br>
+ * <b>author:</b> Jason <br>
+ * <b>version:</b> 1.0 <br>
  * <b>last modified date:</b> 2017/1/17 10:26.
  */
 class JLog {

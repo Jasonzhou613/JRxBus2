@@ -8,12 +8,12 @@ import android.widget.Button;
 import com.ttsea.jrxbus2.RxBus2;
 
 /**
- * 用于发送普通事件和粘性事件的页面 <br/>
+ * 用于发送普通事件和粘性事件的页面 <br>
  * <p>
- * <b>more:</b> 更多请参考<a href="http://www.ttsea.com" title="小周博客">www.ttsea.com</a> <br/>
- * <b>date:</b> 2017/1/17 10:34 <br/>
- * <b>author:</b> Jason <br/>
- * <b>version:</b> 1.0 <br/>
+ * <b>more:</b> 更多请参考<a href="http://www.ttsea.com" title="小周博客">www.ttsea.com</a> <br>
+ * <b>date:</b> 2017/1/17 10:34 <br>
+ * <b>author:</b> Jason <br>
+ * <b>version:</b> 1.0 <br>
  * <b>last modified date:</b> 2017/1/17 10:34.
  */
 public class SendEventActivity extends Activity implements View.OnClickListener {

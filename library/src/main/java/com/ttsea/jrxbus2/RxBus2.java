@@ -20,32 +20,32 @@ import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 
 /**
- * RxBus2，该事件总线是基于RxJava2.x版本开发的，建议同时连续发送的信息少于1000 <br/>
- * <b><i>如何使用</i></b><br/>
- * 1.在Activity或者Fragment的onCreate中调用{@link #register(Object)}进行注册<br/>
- * 2.在Activity或者Fragment的onDestroy中调用{@link #unRegister(Object)} 进行反注册<br/>
- * 3.使用@{@link Subscribe}来标识订阅方法，订阅方法允许有且只有一个参数<br/>
- * 4.使用{@link #post(Object)}或者使用{@link #post(int, Object)}来发送一个事件<br/>
- * 5.使用{@link #postStickyEvent(Object)}或者使用{@link #postStickyEvent(int, Object)} 来发送一个粘性事件<br/>
- * 6.使用{@link #debugMode(boolean)}来设置{@link RxBus2}是否打印日志<br/>
+ * RxBus2，该事件总线是基于RxJava2.x版本开发的，建议同时连续发送的信息少于1000 <br>
+ * <b><i>如何使用</i></b><br>
+ * 1.在Activity或者Fragment的onCreate中调用{@link #register(Object)}进行注册<br>
+ * 2.在Activity或者Fragment的onDestroy中调用{@link #unRegister(Object)} 进行反注册<br>
+ * 3.使用@{@link Subscribe}来标识订阅方法，订阅方法允许有且只有一个参数<br>
+ * 4.使用{@link #post(Object)}或者使用{@link #post(int, Object)}来发送一个事件<br>
+ * 5.使用{@link #postStickyEvent(Object)}或者使用{@link #postStickyEvent(int, Object)} 来发送一个粘性事件<br>
+ * 6.使用{@link #debugMode(boolean)}来设置{@link RxBus2}是否打印日志<br>
  * <p>
- * <b><i>注意事项</i></b><br/>
- * 1.如果不进行反注册可能会引起内存溢出<br/>
- * 2.如果使用{@link #post(int, Object)}来发送事件，则在注册的方法中需要声明对应的code，否则无法接收到该事件，如：<br/>
- * post(1, object)，则注册的方法对应需要用“@Subscribe(code = 1)”来修饰<br/>
- * 3.在app退出时，建议调用{@link #removeAllStickyEvents()}来清除所有粘性事件<br/>
- * 4.粘性事件最大存储值为{@link #MAX_STICKY_EVENT_COUNT},超出这个值，如果想继续加入下一个，则会移除最先加入的那个粘性事件<br/>
+ * <b><i>注意事项</i></b><br>
+ * 1.如果不进行反注册可能会引起内存溢出<br>
+ * 2.如果使用{@link #post(int, Object)}来发送事件，则在注册的方法中需要声明对应的code，否则无法接收到该事件，如：<br>
+ * post(1, object)，则注册的方法对应需要用“@Subscribe(code = 1)”来修饰<br>
+ * 3.在app退出时，建议调用{@link #removeAllStickyEvents()}来清除所有粘性事件<br>
+ * 4.粘性事件最大存储值为{@link #MAX_STICKY_EVENT_COUNT},超出这个值，如果想继续加入下一个，则会移除最先加入的那个粘性事件<br>
  * 5.粘性事件是以事件的参数类型为key来存储的，如：使用postStickyEvent(String)发送一个事件后，再次使用postStickyEvent(String)发送一个事件，
- * 则后面的事件会覆盖掉前面的事件，因为这两个事件都是以"java.lang.String"为key进行存储的，所以后面put进来的事件会覆盖前面的事件<br/>
- * 6.如果需要接收粘性事件，则需要用“@Subscribe(receiveStickyEvent = true)”来标识该方法，默认情况下是不接收粘性事件的<br/>
- * 7.建议连续发送事件数少于1000<br/>
+ * 则后面的事件会覆盖掉前面的事件，因为这两个事件都是以"java.lang.String"为key进行存储的，所以后面put进来的事件会覆盖前面的事件<br>
+ * 6.如果需要接收粘性事件，则需要用“@Subscribe(receiveStickyEvent = true)”来标识该方法，默认情况下是不接收粘性事件的<br>
+ * 7.建议连续发送事件数少于1000<br>
  * 8.如果连续发送的事件量比较大，建议使用“@Subscribe(threadMode = ThreadMode.NEW_THREAD)”来标识接收事件的方法，
- * 使其运行在新线程中避免阻碍UI线程<br/>
+ * 使其运行在新线程中避免阻碍UI线程<br>
  * <p>
- * <b>more:</b> 更多请参考<a href="http://www.ttsea.com" title="小周博客">www.ttsea.com</a> <br/>
- * <b>date:</b> 2017/1/10 10:49 <br/>
- * <b>author:</b> Jason <br/>
- * <b>version:</b> 1.0 <br/>
+ * <b>more:</b> 更多请参考<a href="http://www.ttsea.com" title="小周博客">www.ttsea.com</a> <br>
+ * <b>date:</b> 2017/1/10 10:49 <br>
+ * <b>author:</b> Jason <br>
+ * <b>version:</b> 1.0 <br>
  * <b>last modified date:</b> 2017/1/10 10:49.
  */
 public class RxBus2 {
