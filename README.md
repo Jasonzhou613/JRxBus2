@@ -1,5 +1,31 @@
 # JRxBus2
-在RxJava2.x的基础上实现(RxBus)事件总线，2017/01/17<br/>
+在RxJava2.x的基础上实现(RxBus)事件总线，2017/01/17<br>
+
+#####如何引用
+ * 1.Maven
+
+```xml
+    <dependency>
+      <groupId>com.ttsea.jrxbus2</groupId>
+      <artifactId>jrxbus2</artifactId>
+      <version>1.0.0</version>
+      <type>pom</type>
+    </dependency>
+```
+
+ * 2.Gradle
+
+```xml
+    compile 'com.ttsea.jrxbus2:jrxbus2:1.0.0'
+```
+
+ * 3.Ivy
+
+```xml
+    <dependency org='com.ttsea.jrxbus2' name='jrxbus2' rev='1.0.0'>
+      <artifact name='jrxbus2' ext='pom' ></artifact>
+    </dependency>
+```
 
 #####如何使用
  * 1.在Activity或者Fragment的onCreate中调用 register(Object) 进行注册
