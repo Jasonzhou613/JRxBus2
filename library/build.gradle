@@ -34,4 +34,4 @@ dependencies {
 }
 
 //gradle-jcenter-push.gradle文件是用于发布到jcenter上的，若是找不到可以屏蔽这句话
-apply from: 'gradle-jcenter-push.gradle'
+apply from: 'jcenter-push.gradle'
