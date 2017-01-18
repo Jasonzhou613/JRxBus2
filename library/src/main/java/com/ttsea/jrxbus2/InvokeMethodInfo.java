@@ -3,7 +3,7 @@ package com.ttsea.jrxbus2;
 /**
  * 存储即将被执行的方法的信息 <br>
  * <p>
- * <b>more:</b> 更多请参考<a href="http://www.ttsea.com" title="小周博客">www.ttsea.com</a> <br>
+ * <b>more:</b>更多请点 <a href="http://www.ttsea.com" target="_blank">这里</a> <br>
  * <b>date:</b> 2017/1/13 13:47 <br>
  * <b>author:</b> Jason <br>
  * <b>version:</b> 1.0 <br>
