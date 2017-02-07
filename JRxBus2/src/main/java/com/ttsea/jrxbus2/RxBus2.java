@@ -48,7 +48,7 @@ import io.reactivex.subjects.Subject;
  * <b>version:</b> 1.0 <br>
  * <b>last modified date:</b> 2017/1/10 10:49.
  */
-public class RxBus2 {
+public final class RxBus2 {
     private final String TAG = "RxBus2";
 
     private static volatile RxBus2 rxBus;

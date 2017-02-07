@@ -11,11 +11,18 @@ import android.util.Log;
  * <b>version:</b> 1.0 <br>
  * <b>last modified date:</b> 2017/1/17 10:26.
  */
-class JLog {
-    private static boolean DEBUG = true;
+final class JLog {
+    private static boolean DEBUG = false;
 
     public static void enableLog(boolean enable) {
         DEBUG = enable;
+    }
+
+    public static void i(String tag, String msg) {
+        if (DEBUG) {
+            msg = combineLogMsg(msg);
+            Log.i(tag, "" + msg);
+        }
     }
 
     public static void d(String tag, String msg) {
