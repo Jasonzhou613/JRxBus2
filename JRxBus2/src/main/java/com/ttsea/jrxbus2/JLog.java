@@ -13,27 +13,32 @@ import android.util.Log;
  */
 final class JLog {
     private static boolean DEBUG = false;
+    /**
+     * 输出日志等级，当DEBUG为false的时候会根据设置的等级来输出日志<br>
+     * 从高到低为ASSERT, ERROR, WARN, INFO, DEBUG, VERBOSE<br>
+     */
+    private static String LOG_TAG = "jrxbus2.log.DEGREE";
 
     public static void enableLog(boolean enable) {
         DEBUG = enable;
     }
 
     public static void i(String tag, String msg) {
-        if (DEBUG) {
+        if (DEBUG || Log.isLoggable(LOG_TAG, Log.INFO)) {
             msg = combineLogMsg(msg);
             Log.i(tag, "" + msg);
         }
     }
 
     public static void d(String tag, String msg) {
-        if (DEBUG) {
+        if (DEBUG || Log.isLoggable(LOG_TAG, Log.DEBUG)) {
             msg = combineLogMsg(msg);
             Log.d(tag, "" + msg);
         }
     }
 
     public static void e(String tag, String msg) {
-        if (DEBUG) {
+        if (DEBUG || Log.isLoggable(LOG_TAG, Log.ERROR)) {
             msg = combineLogMsg(msg);
             Log.e(tag, "" + msg);
         }
@@ -69,4 +74,3 @@ final class JLog {
         return caller;
     }
 }
-
