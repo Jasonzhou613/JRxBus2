@@ -71,7 +71,7 @@
     }
 ```
 
- * 4.使用post(Object)或者使用post(int, Object)来发送一个事件
+ * 4.使用post(Object)或者使用post(int, Object)来发送一个普通事件
 
 ```java
       RxBus2.getInstance().post("normal event");
@@ -96,8 +96,6 @@
  * 6.如果需要接收粘性事件，则需要用“@Subscribe(receiveStickyEvent = true)”来标识该方法，默认情况下是不接收粘性事件的
  * 7.建议连续发送事件数少于1000
  * 8.如果连续发送的事件量比较大，建议使用“@Subscribe(threadMode = ThreadMode.NEW_THREAD)”来标识接收事件的方法，使其运行在新线程中避免阻碍UI线程
-
-
 
 
 
