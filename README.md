@@ -8,7 +8,7 @@
     <dependency>
       <groupId>com.ttsea.jrxbus2</groupId>
       <artifactId>jrxbus2</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
       <type>pom</type>
     </dependency>
 ```
@@ -16,13 +16,13 @@
  * 2.Gradle
 
 ```xml
-    compile 'com.ttsea.jrxbus2:jrxbus2:1.0.0'
+    compile 'com.ttsea.jrxbus2:jrxbus2:1.0.1'
 ```
 
  * 3.Ivy
 
 ```xml
-    <dependency org='com.ttsea.jrxbus2' name='jrxbus2' rev='1.0.0'>
+    <dependency org='com.ttsea.jrxbus2' name='jrxbus2' rev='1.0.1'>
       <artifact name='jrxbus2' ext='pom' ></artifact>
     </dependency>
 ```
