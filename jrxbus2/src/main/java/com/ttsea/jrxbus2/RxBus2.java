@@ -84,7 +84,7 @@ public final class RxBus2 {
     }
 
     public void debugMode(boolean debug) {
-        JLog.enableLog(debug);
+        JRxBusLog.enableLog(debug);
     }
 
     /**
@@ -129,7 +129,7 @@ public final class RxBus2 {
                 //超过最大值的时候，移除最先加入的那个粘性事件
                 Class<?> c = stickyEventKeys.poll();
                 stickyEventMap.remove(c);
-                JLog.d(TAG, "sticky event size is larger than " + MAX_STICKY_EVENT_COUNT +
+                JRxBusLog.d(TAG, "sticky event size is larger than " + MAX_STICKY_EVENT_COUNT +
                         ", we will remove the first one, c:" + c.getSimpleName());
             }
             //先移除，在添加，确保后发送的粘性事件排在最后
@@ -269,7 +269,7 @@ public final class RxBus2 {
                                     if (throwable != null) {
                                         msg = msg + throwable.getMessage();
                                     }
-                                    JLog.e(TAG, "throwable, msg:" + msg);
+                                    JRxBusLog.e(TAG, "throwable, msg:" + msg);
                                 }
                             });
 
@@ -277,7 +277,7 @@ public final class RxBus2 {
 
         } catch (Exception e) {
             e.printStackTrace();
-            JLog.e(TAG, "Exception e:" + e.getMessage());
+            JRxBusLog.e(TAG, "Exception e:" + e.getMessage());
         }
     }
 
@@ -439,11 +439,11 @@ public final class RxBus2 {
     }
 
     private void println(String msg) {
-        JLog.d(TAG, msg);
+        JRxBusLog.d(TAG, msg);
     }
 
     private void printlnRxBusInfo() {
-        JLog.d(TAG, "==========subscriber size:" + subscribersMap.size());
+        JRxBusLog.d(TAG, "==========subscriber size:" + subscribersMap.size());
         int position = 0;
         for (Map.Entry<Object, Object> subscriberEntry : subscribersMap.entrySet()) {
             String msg = subscriberEntry.getKey().getClass().getSimpleName() + "{";
@@ -473,19 +473,19 @@ public final class RxBus2 {
             }
 
             msg = msg + "}";
-            JLog.d(TAG, "subscriber(" + position + ")->" + msg);
+            JRxBusLog.d(TAG, "subscriber(" + position + ")->" + msg);
             position++;
         }
     }
 
     private void printlnStickyEvent() {
-        JLog.d(TAG, "==========stickyEventMap size:" + stickyEventMap.size() + ", key size:" + stickyEventKeys.size());
+        JRxBusLog.d(TAG, "==========stickyEventMap size:" + stickyEventMap.size() + ", key size:" + stickyEventKeys.size());
         int position = 0;
         for (Map.Entry<Class<?>, StickyMessage> entry : stickyEventMap.entrySet()) {
             String msg = entry.getKey().getName() + "[" +
                     entry.getValue().getCanExecuteTimes() + ", " + entry.getValue().getObject() +
                     "]";
-            JLog.d(TAG, "stickyEvent(" + position + ")->" + msg);
+            JRxBusLog.d(TAG, "stickyEvent(" + position + ")->" + msg);
             position++;
         }
     }

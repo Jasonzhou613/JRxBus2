@@ -43,7 +43,7 @@ class InvokeMethodInfo {
 
         } catch (Exception e) {
             e.printStackTrace();
-            JLog.e(TAG, "Exception e:" + e.toString());
+            JRxBusLog.e(TAG, "Exception e:" + e.toString());
         }
     }
 

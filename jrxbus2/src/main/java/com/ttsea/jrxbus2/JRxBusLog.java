@@ -11,7 +11,7 @@ import android.util.Log;
  * <b>version:</b> 1.0 <br>
  * <b>last modified date:</b> 2017/1/17 10:26.
  */
-final class JLog {
+final class JRxBusLog {
     private static boolean DEBUG = false;
     /**
      * 输出日志等级，当DEBUG为false的时候会根据设置的等级来输出日志<br>
@@ -62,7 +62,7 @@ final class JLog {
         String caller = "<unknown>";
         for (int i = 3; i < trace.length; i++) {
             Class<?> clazz = trace[i].getClass();
-            if (!clazz.equals(JLog.class)) {
+            if (!clazz.equals(JRxBusLog.class)) {
                 String callingClass = trace[i].getClassName();
                 callingClass = callingClass.substring(callingClass.lastIndexOf('.') + 1);
                 callingClass = callingClass.substring(callingClass.lastIndexOf('$') + 1);
