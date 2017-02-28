@@ -19,7 +19,7 @@ final class JRxBusLog {
      */
     private static String LOG_TAG = "jrxbus2.log.DEGREE";
 
-    public static void enableLog(boolean enable) {
+    protected static void enableLog(boolean enable) {
         DEBUG = enable;
     }
 
