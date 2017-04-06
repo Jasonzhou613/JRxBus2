@@ -16,6 +16,7 @@ final class JRxBusLog {
     /**
      * 输出日志等级，当DEBUG为false的时候会根据设置的等级来输出日志<br>
      * 从高到低为ASSERT, ERROR, WARN, INFO, DEBUG, VERBOSE<br>
+     * 使用adb shell setprop log.tag.{@link #LOG_TAG}来控制输出log等级
      */
     private static String LOG_TAG = "jrxbus2.log.DEGREE";
 

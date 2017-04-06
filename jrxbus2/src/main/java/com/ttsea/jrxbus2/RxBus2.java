@@ -24,7 +24,7 @@ import io.reactivex.subjects.Subject;
  * <b><i>如何使用</i></b><br>
  * 1.在Activity或者Fragment的onCreate中调用{@link #register(Object)}进行注册<br>
  * 2.在Activity或者Fragment的onDestroy中调用{@link #unRegister(Object)} 进行反注册<br>
- * 3.使用@{@link Subscribe}来标识订阅方法，订阅方法允许有且只有一个参数，且该方法需要用 public 来修饰<br>
+ * 3.使用@{@link Subscribe}来标识订阅方法，订阅方法允许有且只有一个参数，且该方法必须需要用 <i><strong>public</strong></i> 来修饰<br>
  * 4.使用{@link #post(Object)}或者使用{@link #post(int, Object)}来发送一个普通事件<br>
  * 5.使用{@link #postStickyEvent(Object)}或者使用{@link #postStickyEvent(int, Object)} 来发送一个粘性事件<br>
  * 6.使用{@link #debugMode(boolean)}来设置{@link RxBus2}是否打印日志<br>
@@ -46,7 +46,6 @@ import io.reactivex.subjects.Subject;
  * <b>date:</b> 2017/1/10 10:49 <br>
  * <b>author:</b> Jason <br>
  * <b>version:</b> 1.0.1 <br>
- * <b>last modified date:</b> 2017/1/10 10:49.
  */
 public final class RxBus2 {
     private final String TAG = "RxBus2";
