@@ -1,14 +1,14 @@
 # JRxBus2
 在RxJava2.x的基础上实现(RxBus)事件总线，2017/01/17<br>
 
-#####如何引用
+####如何引用
  * 1.Maven
 
 ```xml
     <dependency>
       <groupId>com.ttsea.jrxbus2</groupId>
       <artifactId>jrxbus2</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2</version>
       <type>pom</type>
     </dependency>
 ```
@@ -16,18 +16,18 @@
  * 2.Gradle
 
 ```xml
-    compile 'com.ttsea.jrxbus2:jrxbus2:1.0.1'
+    compile 'com.ttsea.jrxbus2:jrxbus2:1.0.2'
 ```
 
  * 3.Ivy
 
 ```xml
-    <dependency org='com.ttsea.jrxbus2' name='jrxbus2' rev='1.0.1'>
+    <dependency org='com.ttsea.jrxbus2' name='jrxbus2' rev='1.0.2'>
       <artifact name='jrxbus2' ext='pom' ></artifact>
     </dependency>
 ```
 
-#####如何使用
+####如何使用
  * 1.在Activity或者Fragment的onCreate中调用 register(Object) 进行注册
  * 2.在Activity或者Fragment的onDestroy中调用 unRegister(Object) 进行反注册
 
@@ -87,7 +87,7 @@
      RxBus2.getInstance().debugMode(true);
 ```
 
-#####注意事项
+####注意事项
  * 1.如果不进行反注册可能会引起内存溢出
  * 2.如果使用 post(int, Object) 来发送事件，则在注册的方法中需要声明对应的code，否则无法接收到该事件，如：post(1, object)，则注册的方法对应需要用“@Subscribe(code = 1)”来修饰
  * 3.在app退出时，建议调用 removeAllStickyEvents() 来清除所有粘性事件
