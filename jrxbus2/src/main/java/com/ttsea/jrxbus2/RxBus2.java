@@ -24,7 +24,11 @@ import io.reactivex.subjects.Subject;
  * <b><i>如何使用</i></b><br>
  * 1.在Activity或者Fragment的onCreate中调用{@link #register(Object)}进行注册<br>
  * 2.在Activity或者Fragment的onDestroy中调用{@link #unRegister(Object)} 进行反注册<br>
- * 3.使用@{@link Subscribe}来标识订阅方法，订阅方法允许有且只有一个参数，且该方法必须需要用 <i><strong>public</strong></i> 来修饰<br>
+ * 3.该订阅方法必须同时满足以下条件：<br>
+ * <blockquote>3.1 该订阅方法必须使用@{@link Subscribe}来标识</blockquote>
+ * <blockquote>3.2 该订阅方法允许有且只有一个参数</blockquote>
+ * <blockquote>3.3 该订阅方法必须用 <i><strong>public</strong></i> 来修饰</blockquote>
+ * <blockquote>3.4 该订阅方法必须以“on”开头，以“Event”结尾，区分大小写，如"onLoginEvent()"，主要匹配方式为"on**Event()"</blockquote>
  * 4.使用{@link #post(Object)}或者使用{@link #post(int, Object)}来发送一个普通事件<br>
  * 5.使用{@link #postStickyEvent(Object)}或者使用{@link #postStickyEvent(int, Object)} 来发送一个粘性事件<br>
  * 6.使用{@link #debugMode(boolean)}来设置{@link RxBus2}是否打印日志<br>
@@ -151,7 +155,8 @@ public final class RxBus2 {
         Class<?> subClass = subscriber.getClass();
         Method[] methods = subClass.getDeclaredMethods();
         for (Method method : methods) {
-            if (method.isAnnotationPresent(Subscribe.class)) {
+            String methodName = method.getName();
+            if (method.isAnnotationPresent(Subscribe.class) && methodName.startsWith("on") && methodName.endsWith("Event")) {
                 //获得参数类型
                 Class[] parameterType = method.getParameterTypes();
                 //参数不为空 且参数个数为1
@@ -212,7 +217,7 @@ public final class RxBus2 {
                     .map(new Function<Message, List<InvokeMethodInfo>>() {
                         @Override
                         public List<InvokeMethodInfo> apply(Message message) throws Exception {
-                            println("map->apply to List<InvokeMethodInfo>, thread:" + Thread.currentThread());
+                            JRxBusLog.d("map->apply to List<InvokeMethodInfo>, thread:" + Thread.currentThread());
                             List<InvokeMethodInfo> methodInfos = getInvokeMethods(subscriberMethodInfo, message);
                             //如果是粘性事件，计算粘性事件的课消费次数
                             if (message instanceof StickyMessage) {
@@ -232,7 +237,7 @@ public final class RxBus2 {
                                             methodNames = methodNames + "," + info.getSubscriberMethodInfo().getMethod().getName();
                                         }
                                         methodNames = methodNames.replaceFirst(",", "");
-                                        println("The " + stickyMessage.toString() + " canExecuteTimes is not enough, the method["
+                                        JRxBusLog.d("The " + stickyMessage.toString() + " canExecuteTimes is not enough, the method["
                                                 + methodNames + "] will not invoked.");
                                     } else {
                                         stickyMessage.setCanExecuteTimes(stickyMessage.getCanExecuteTimes() - methodInfos.size());
@@ -250,7 +255,7 @@ public final class RxBus2 {
                             new Consumer<List<InvokeMethodInfo>>() {
                                 @Override
                                 public void accept(List<InvokeMethodInfo> invokeMethodInfos) throws Exception {
-                                    println("subscribe->accept, thread:" + Thread.currentThread());
+                                    JRxBusLog.d("subscribe->accept, thread:" + Thread.currentThread());
                                     if (invokeMethodInfos == null) {
                                         return;
                                     }
@@ -263,7 +268,7 @@ public final class RxBus2 {
                             new Consumer<Throwable>() {
                                 @Override
                                 public void accept(Throwable throwable) throws Exception {
-                                    println("thread:" + Thread.currentThread());
+                                    JRxBusLog.d("thread:" + Thread.currentThread());
                                     String msg = "Error msg:";
                                     if (throwable != null) {
                                         msg = msg + throwable.getMessage();
@@ -437,10 +442,6 @@ public final class RxBus2 {
         }
     }
 
-    private void println(String msg) {
-        JRxBusLog.d(TAG, msg);
-    }
-
     private void printlnRxBusInfo() {
         JRxBusLog.d(TAG, "==========subscriber size:" + subscribersMap.size());
         int position = 0;
@@ -481,10 +482,9 @@ public final class RxBus2 {
         JRxBusLog.d(TAG, "==========stickyEventMap size:" + stickyEventMap.size() + ", key size:" + stickyEventKeys.size());
         int position = 0;
         for (Map.Entry<Class<?>, StickyMessage> entry : stickyEventMap.entrySet()) {
-            String msg = entry.getKey().getName() + "[" +
-                    entry.getValue().getCanExecuteTimes() + ", " + entry.getValue().getObject() +
-                    "]";
-            JRxBusLog.d(TAG, "stickyEvent(" + position + ")->" + msg);
+            String key = entry.getKey().getName();
+            StickyMessage msg = entry.getValue();
+            JRxBusLog.d(TAG, position + "->key=" + key + ", msg=" + msg.toString());
             position++;
         }
     }

@@ -22,22 +22,22 @@ class StickyMessage extends Message {
     protected StickyMessage(int canExecuteTimes, Object o) {
         super(-1, o);
         this.canExecuteTimes = (canExecuteTimes == 0 ? 1 : canExecuteTimes);
-        this.object = o;
-    }
-
-    public int getCanExecuteTimes() {
-        return canExecuteTimes;
     }
 
     public void setCanExecuteTimes(int canExecuteTimes) {
         this.canExecuteTimes = canExecuteTimes;
     }
 
+    public int getCanExecuteTimes() {
+        return canExecuteTimes;
+    }
+
     @Override
     public String toString() {
         return "StickyMessage{" +
                 "canExecuteTimes=" + canExecuteTimes +
-                ", object=" + object +
+                "code=" + getCode() +
+                ", object=" + getObject() +
                 '}';
     }
 }

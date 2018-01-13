@@ -1,14 +1,15 @@
-# JRxBus2
-在RxJava2.x的基础上实现(RxBus)事件总线，2017/01/17<br>
 
-####如何引用
+# JRxBus2
+在RxJava2.x的基础上实现(RxBus)事件总线，2017/01/17
+
+##### 如何引用
  * 1.Maven
 
 ```xml
     <dependency>
       <groupId>com.ttsea.jrxbus2</groupId>
       <artifactId>jrxbus2</artifactId>
-      <version>1.0.2</version>
+      <version>1.0.3</version>
       <type>pom</type>
     </dependency>
 ```
@@ -16,18 +17,18 @@
  * 2.Gradle
 
 ```xml
-    compile 'com.ttsea.jrxbus2:jrxbus2:1.0.2'
+    compile 'com.ttsea.jrxbus2:jrxbus2:1.0.3'
 ```
 
  * 3.Ivy
 
 ```xml
-    <dependency org='com.ttsea.jrxbus2' name='jrxbus2' rev='1.0.2'>
+    <dependency org='com.ttsea.jrxbus2' name='jrxbus2' rev='1.0.3'>
       <artifact name='jrxbus2' ext='pom' ></artifact>
     </dependency>
 ```
 
-####如何使用
+##### 如何使用
  * 1.在Activity或者Fragment的onCreate中调用 register(Object) 进行注册
  * 2.在Activity或者Fragment的onDestroy中调用 unRegister(Object) 进行反注册
 
@@ -50,22 +51,36 @@
  * 3.使用@Subscribe来标识订阅方法，订阅方法允许有且只有一个参数
 
 ```java
-    //默认普通事件
+       //默认普通事件
     @Subscribe
     public void onRxBusEvent(String msg) {
         Log.d(TAG, "msg:" + msg);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+    //默认普通事件，不是以"Event"结尾，是收不到消息的
+    @Subscribe
+    public void onRxBusEvent2(String msg) {
+        Log.d(TAG, "msg:" + msg);
+        Toast.makeText(this, msg + "2", Toast.LENGTH_SHORT).show();
+    }
+
+    //普通事件，并且设定该方法只接收指定code的事件
+    @Subscribe(code = 2)
+    public void onCodeEvent(String msg) {
+        Log.d(TAG, "msg:" + msg + "\ncode 2\n" + Thread.currentThread().getName());
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
     //普通事件，并且设定该方法运行的线程和设定只接收指定code的事件
     @Subscribe(threadMode = ThreadMode.IO, code = 2)
-    public void onRxBusEvent2(String msg) {
+    public void onThreadModeEvent(String msg) {
         Log.d(TAG, "msg:" + msg + "\ncode 2\n" + Thread.currentThread().getName());
     }
 
     //只接收粘性事件
     @Subscribe(receiveStickyEvent = true)
-    public void onRxBusEvent3(String msg) {
+    public void onRxStickyEvent(String msg) {
         Log.d(TAG, "msg:" + msg);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
@@ -87,7 +102,7 @@
      RxBus2.getInstance().debugMode(true);
 ```
 
-####注意事项
+##### 注意事项
  * 1.如果不进行反注册可能会引起内存溢出
  * 2.如果使用 post(int, Object) 来发送事件，则在注册的方法中需要声明对应的code，否则无法接收到该事件，如：post(1, object)，则注册的方法对应需要用“@Subscribe(code = 1)”来修饰
  * 3.在app退出时，建议调用 removeAllStickyEvents() 来清除所有粘性事件
@@ -97,5 +112,19 @@
  * 7.建议连续发送事件数少于1000
  * 8.如果连续发送的事件量比较大，建议使用“@Subscribe(threadMode = ThreadMode.NEW_THREAD)”来标识接收事件的方法，使其运行在新线程中避免阻碍UI线程
 
+##### 混淆配置
+为了在app混淆后也能接收到消息，需要在混淆文件中添加以下规则：
+```xml
+-dontoptimize
+-dontusemixedcaseclassnames
 
+-keep class com.ttsea.jrxbus2**{*;}
+-keep class io.reactivex**{*;}
 
+-keepclassmembers class * {
+    public *** on*Event(***);
+}
+```
+
+##### 修改日志
+ * [version log](version_log.md)  

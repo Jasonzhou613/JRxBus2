@@ -11,7 +11,7 @@ package com.ttsea.jrxbus2;
  */
 class Message {
     private int code = -1;
-    protected Object object;
+    private Object object;
 
     /**
      * 构造函数

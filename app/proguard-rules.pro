@@ -15,3 +15,14 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontoptimize
+-dontusemixedcaseclassnames
+
+-keep class android.support**{*;}
+-keep class com.ttsea.jrxbus2**{*;}
+-keep class io.reactivex**{*;}
+
+-keepclassmembers class * {
+    public *** on*Event(***);
+}
